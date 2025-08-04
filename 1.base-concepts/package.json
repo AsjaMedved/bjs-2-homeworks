@@ -1,0 +1,18 @@
+{
+  "name": "1.base-concepts",
+  "version": "1.0.0",
+  "description": "Перед выполнением заданий ознакомьтесь с блоком [перед началом работы над проектом](../README.md#перед-началом-работы-над-проектом). Выполните форк репозитория, разверните его с помощью Github pages и выполните задание [Работа с отладкой в браузере](../0.debugger/README.md).\r ## Задача 1",
+  "main": "task.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
