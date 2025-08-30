@@ -32,24 +32,24 @@ function debounceDecoratorNew(func, delay) {
   let isFirstCall = true;
 
   function wrapper(...args) {
-    wrapper.allCount++; // Счётчик всех вызовов декоратора
+    wrapper.allCount++; 
 
     if (isFirstCall) {
-      func.apply(this, args); // Первый вызов мгновенный
-      wrapper.count++; // Увеличиваем счётчик реальных вызовов
+      func.apply(this, args); 
+      wrapper.count++; 
       isFirstCall = false;
       return;
     }
 
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
-      func.apply(this, args); // Асинхронный вызов
-      wrapper.count++; // Увеличиваем счётчик реальных вызовов
+      func.apply(this, args); 
+      wrapper.count++; 
     }, delay);
   }
 
-  wrapper.count = 0;     // Счётчик реальных вызовов функции
-  wrapper.allCount = 0;  // Счётчик всех вызовов декоратора
+  wrapper.count = 0;     
+  wrapper.allCount = 0;  
 
   return wrapper;
 }
