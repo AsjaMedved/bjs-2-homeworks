@@ -28,42 +28,28 @@ function cachingDecoratorNew(func) {
 //Задача № 2
 
 function debounceDecoratorNew(func, delay) {
-
   let timeoutId;
-  let count = 0;
-  let allCount = 0;
-  let hasCalled = false;
+  let isFirstCall = true;
 
   function wrapper(...args) {
+    wrapper.allCount++; // Счётчик всех вызовов декоратора
 
-    if (timeoutId) {
-      clearTimeout(timeoutId);
+    if (isFirstCall) {
+      func.apply(this, args); // Первый вызов мгновенный
+      wrapper.count++; // Увеличиваем счётчик реальных вызовов
+      isFirstCall = false;
+      return;
     }
 
-    if (!wrapper.count) {
-      wrapper.count = 0;
-    }
-
-    if (!wrapper.allCount) {
-      wrapper.allCount = 0;
-    }
-
-    wrapper.count++;
-    wrapper.allCount++;
-
-    if (!hasCalled) {
-      func.apply(this, args);
-      hasCalled = true;
-    } else {
-      timeoutId = setTimeout(() => {
-        func.apply(this, args);
-        hasCalled = true;
-      }, delay);
-    }
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args); // Асинхронный вызов
+      wrapper.count++; // Увеличиваем счётчик реальных вызовов
+    }, delay);
   }
 
-  wrapper.count = count;
-  wrapper.allCount = allCount;
+  wrapper.count = 0;     // Счётчик реальных вызовов функции
+  wrapper.allCount = 0;  // Счётчик всех вызовов декоратора
 
   return wrapper;
 }
